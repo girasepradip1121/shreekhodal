@@ -27,6 +27,7 @@ export default function Checkout() {
   };
   const userData = userToken();
   const userId = userData?.userId;
+  const token=userData?.token;
 
   // Calculate totals
   const shippingCharges = subtotal >= 500 ? 0 : 50;
@@ -51,7 +52,10 @@ export default function Checkout() {
         })),
       };
       console.log("cartitems", cartItems);
-      const response = await axios.post(`${API_URL}/order/create`, orderData);
+      const response = await axios.post(`${API_URL}/order/create`, orderData, {
+        headers: { Authorization: `Bearer ${token}` },  // ✅ Bracket fix
+      });
+      
       if (response.status === 201) {
         toast.success("Order placed successfully");
         navigate("/ordersuccess");

@@ -49,7 +49,9 @@ export default function Navbar() {
     if (!userId) return; // User logged in nahi hai toh API call mat karo
   
     try {
-      const response = await axios.get(`${API_URL}/cart/getall/${userId}`);
+      const response = await axios.get(`${API_URL}/cart/getall/${userId}`,{
+        headers:{Authorization:`Bearer ${userData?.token}`}
+      });
       setCartCount(response.data.length);
     } catch (error) {
       console.log("Error fetching cart:", error);

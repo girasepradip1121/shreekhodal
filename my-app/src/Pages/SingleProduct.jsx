@@ -13,6 +13,7 @@ const SingleProduct = () => {
   const { productId } = useParams();
   const navigate = useNavigate();
   const userData = userToken();
+  const token = userData?.token;
 
   const productImages = product?.images ? JSON.parse(product.images) : [];
   // const materials = product?.material ? product.material.split(",") : [];
@@ -29,7 +30,6 @@ const SingleProduct = () => {
   ];
   console.log("product", product, product?.material);
 
-  // Backend se material aisa aa raha hai: ["1,2"]
 
   const filteredMaterials = materials.filter(
     (mat) => product?.material.includes(mat.value) // ✅ Correct Matching
@@ -78,19 +78,23 @@ const SingleProduct = () => {
 
   const handleAddToCart = async (userId, productId, material, quantity) => {
     try {
-      if (!userData?.token) {
+      if (!token) {
         toast.error("Please login to add items to cart.");
         setTimeout(() => {
           navigate("/login");
         }, 1000);
         return;
       }
-      const response = await axios.post(`${API_URL}/cart/create`, {
-        userId: userData.userId,
-        productId: product.productId,
-        material: selectedMaterial,
-        quantity: 1,
-      });
+      const response = await axios.post(
+        `${API_URL}/cart/create`,
+        {
+          userId: userData.userId,
+          productId: product.productId,
+          material: selectedMaterial,
+          quantity: 1,
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
       if (response.status === 200) {
         toast.success("Item added to Cart Successfully!");
         return response.data;
@@ -169,7 +173,7 @@ const SingleProduct = () => {
             </button>
             <button
               className="md:w-[469px] w-full py-3 border border-gray-300 font-semibold rounded-full font-[Inter]"
-              onClick={(e) => handleAddToCart()}
+              onClick={() => handleAddToCart()}
             >
               Add to Cart
             </button>

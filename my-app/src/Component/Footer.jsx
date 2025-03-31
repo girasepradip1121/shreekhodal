@@ -1,6 +1,7 @@
 import React from 'react'
 import FImg from "../Images/FImg.png"
 import { FaFacebook, FaInstagram, FaPinterest } from "react-icons/fa";
+import { Link } from 'react-router-dom';
 const Footer = () => {
   return (
     <>
@@ -12,7 +13,7 @@ const Footer = () => {
 
                 <div className="w-full md:w-[50%] flex flex-col items-center text-center md:text-left px-6 h-[200px] md:h-[400px] bg-white">
                     <h2 className="text-3xl font-semibold text-gray-800 mb-4 md:mt-30 mt-5">STAY IN TOUCH</h2>
-                    <p className="text-gray-700 mb-4 text-center">Subscribe to get special offers, free giveaways, and once-in-a-lifetime deals.</p>
+                    <p className="text-gray-700 mb-4 text-center">Subscribe to get special offers, free giveaways, and once-in-Link-lifetime deals.</p>
                       <button className="bg-gray-800 text-white px-6 py-2 rounded-md hover:bg-gray-900 transition">
                         Subscribe
                       </button>
@@ -24,9 +25,9 @@ const Footer = () => {
         <div>
           <h3 className="font-semibold text-lg text-gray-800 mb-2 text-center">Product</h3>
           <ul className="text-gray-600 space-y-1 text-center">
-            <li><a href="#" className="hover:underline">Privacy Policy</a></li>
-            <li><a href="#" className="hover:underline">Terms of Service</a></li>
-            <li><a href="#" className="hover:underline">FAQ</a></li>
+            <li><Link to="#" className="hover:underline">Privacy Policy</Link></li>
+            <li><Link to="#" className="hover:underline">Terms of Service</Link></li>
+            <li><Link to="#" className="hover:underline">FAQ</Link></li>
           </ul>
         </div>
 
@@ -34,8 +35,8 @@ const Footer = () => {
         <div>
           <h3 className="font-semibold text-lg text-gray-800 mb-2 text-center">Resources</h3>
           <ul className="text-gray-600 space-y-1 text-center">
-            <li><a href="#" className="hover:underline">Documentation</a></li>
-            <li><a href="#" className="hover:underline">Case Studies</a></li>
+            <li><Link to="#" className="hover:underline">Documentation</Link></li>
+            <li><Link to="#" className="hover:underline">Case Studies</Link></li>
           </ul>
         </div>
 
@@ -43,8 +44,8 @@ const Footer = () => {
         <div>
           <h3 className="font-semibold text-lg text-gray-800 mb-2 text-center">Company</h3>
           <ul className="text-gray-600 space-y-1 text-center">
-            <li><a href="/contact" className="hover:underline">About Us</a></li>
-            <li><a href="/contact" className="hover:underline">Contact Us</a></li>
+            <li><Link to="/contact" className="hover:underline">About Us</Link></li>
+            <li><Link to="/contact" className="hover:underline">Contact Us</Link></li>
           </ul>
         </div>
       </div>

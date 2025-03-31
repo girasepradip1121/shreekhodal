@@ -3,12 +3,14 @@ import axios from "axios";
 import { Eye } from "lucide-react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { API_URL } from "../Component/Variable";
+import { API_URL, userToken } from "../Component/Variable";
 
 const ManageContact = () => {
   const [requests, setRequests] = useState([]);
   const [selectedRequest, setSelectedRequest] = useState(null);
   const [loading, setLoading] = useState(false);
+  const userData=userToken();
+  const token=userData?.token;
 
   useEffect(() => {
     fetchRequests();
@@ -17,7 +19,9 @@ const ManageContact = () => {
   const fetchRequests = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`${API_URL}/request/getall`);
+      const response = await axios.get(`${API_URL}/request/getall`,{
+        headers: { Authorization: `Bearer ${token}` }, 
+      });
       setRequests(response.data);
     } catch (error) {
       console.log("Error fetching requests", error);

@@ -10,6 +10,7 @@ export default function MyOrders() {
 
   const userData = userToken();
   const userId = userData?.userId;
+  const token = userData?.token;
 
   const status = [
     { value: 1, label: "Pending" },
@@ -25,7 +26,9 @@ export default function MyOrders() {
 
   const fetchOrders = async () => {
     try {
-      const response = await axios.get(`${API_URL}/order/userorder/${userId}`);
+      const response = await axios.get(`${API_URL}/order/userorder/${userId}`, {
+        headers: { Authorization: `Bearer ${token}` }, // ✅ Bracket fix
+      });
       setOrders(response.data);
     } catch (error) {
       console.error("Error fetching orders:", error);
@@ -141,30 +144,31 @@ export default function MyOrders() {
 
       {/* Delete Confirmation Modal */}
       {isModalOpen && (
-  <div className="fixed inset-0 flex items-center justify-center backdrop-blur-md px-4 sm:px-6 lg:px-8">
-    <div className="bg-white p-4 sm:p-6 lg:p-8 rounded-lg shadow-lg max-w-md w-full">
-      <h2 className="text-lg sm:text-xl font-semibold mb-4 text-center">
-        Are you sure?
-      </h2>
-      <p className="mb-4 text-center">You want to delete this order permanently.</p>
-      <div className="flex justify-center gap-4">
-        <button
-          onClick={() => setIsModalOpen(false)}
-          className="px-4 py-2 bg-gray-300 rounded text-sm sm:text-base"
-        >
-          Cancel
-        </button>
-        <button
-          onClick={confirmDeleteOrder}
-          className="px-4 py-2 bg-red-500 text-white rounded text-sm sm:text-base"
-        >
-          Delete
-        </button>
-      </div>
-    </div>
-  </div>
-)}
-
+        <div className="fixed inset-0 flex items-center justify-center backdrop-blur-md px-4 sm:px-6 lg:px-8">
+          <div className="bg-white p-4 sm:p-6 lg:p-8 rounded-lg shadow-lg max-w-md w-full">
+            <h2 className="text-lg sm:text-xl font-semibold mb-4 text-center">
+              Are you sure?
+            </h2>
+            <p className="mb-4 text-center">
+              You want to delete this order permanently.
+            </p>
+            <div className="flex justify-center gap-4">
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="px-4 py-2 bg-gray-300 rounded text-sm sm:text-base"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={confirmDeleteOrder}
+                className="px-4 py-2 bg-red-500 text-white rounded text-sm sm:text-base"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -19,8 +19,8 @@ const Home = () => {
     { id: 1, name: "Earrings", image: Earring },
     { id: 2, name: "Necklaces", image: Necklaces },
     { id: 3, name: "Bracelets", image: Bracelets },
-    { id: 3, name: "All Rings", image: AllRings },
-    { id: 3, name: "Engagement Rings", image: EngagementRings },
+    { id: 4, name: "All Rings", image: AllRings },
+    { id: 5, name: "Engagement Rings", image: EngagementRings },
   ];
   const Latest = [
     { id: 1, name: "Item-1", img: Latest1 },

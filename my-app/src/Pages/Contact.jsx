@@ -44,25 +44,25 @@ const Contact = () => {
     {
       id: 1,
       title: "Mobile Number",
-      icon: <i class="fa-solid fa-phone"></i>,
+      icon: <i className="fa-solid fa-phone"></i>,
       text: "+971 558832713",
     },
     {
       id: 2,
       title: "Email",
-      icon: <i class="fa-solid fa-envelope"></i>,
+      icon: <i className="fa-solid fa-envelope"></i>,
       text: "bhavinpatel971892 @gmail.com",
     },
     {
       id: 3,
       title: "Address",
-      icon: <i class="fa-solid fa-location-dot"></i>,
+      icon: <i className="fa-solid fa-location-dot"></i>,
       text: "Shop No. 403, City Gold Plaza, Pedak Road, Near Patel Vadi, Rajkot, Gujarat, India.",
     },
     {
       id: 4,
       title: "Working Hours",
-      icon: <i class="fa-solid fa-clock"></i>,
+      icon: <i className="fa-solid fa-clock"></i>,
       text: "Mon - Sat 09:00 TO 18:00",
     },
   ];

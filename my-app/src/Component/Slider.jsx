@@ -38,7 +38,7 @@ export default function Slider() {
               <div className="absolute flex-col inset-0 flex items-center  justify-center ml-5 mr-5" >
                 <p className="text-white md:text-6xl text-2xl font-bold md:leading-20 leading-10" style={{fontFamily:'EB Garamond'}}>{slide.text}</p>
                 <p className="text-white md:text-2xl text-sl font-[200] md:leading-20 font-[Inter] leading-10 ">{slide.text1}</p>
-                <button className="border-2 text-white p-2  md:w-100 font-[Lato] cursor-pointer" onClick={()=>{navigate('/category')}}><i class="fa-solid fa-star md:mr-20 mr-5"></i>{slide.btntext}<i class=" ml-5 fa-solid fa-star md:ml-20"></i></button>
+                <button className="border-2 text-white p-2  md:w-100 font-[Lato] cursor-pointer" onClick={()=>{navigate('/category')}}><i className="fa-solid fa-star md:mr-20 mr-5"></i>{slide.btntext}<i className=" ml-5 fa-solid fa-star md:ml-20"></i></button>
               </div>
             </SwiperSlide>
           ))}

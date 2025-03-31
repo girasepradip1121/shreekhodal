@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API_URL, userToken } from "../Component/Variable";
 import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"
+import "react-toastify/dist/ReactToastify.css";
 
 const Cart = () => {
   const userData = userToken();
@@ -26,7 +26,7 @@ const Cart = () => {
     try {
       setLoading(true);
       const response = await axios.get(`${API_URL}/cart/getAll/${userId}`, {
-        // headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${token}` },
       });
       console.log("response", response.data);
 
@@ -60,11 +60,14 @@ const Cart = () => {
       const newQuantity = updatedItem.quantity + change;
       if (newQuantity < 1) return;
 
-      await axios.put(`${API_URL}/cart/update/${cartId}`, {
-        quantity: newQuantity,
-      });
+      await axios.put(
+        `${API_URL}/cart/update/${cartId}`,
+        {
+          quantity: newQuantity,
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
 
-      // 🔹 UI Update
       setCartItems((prevItems) =>
         prevItems?.map((item) =>
           item.cartId === cartId ? { ...item, quantity: newQuantity } : item
@@ -80,13 +83,14 @@ const Cart = () => {
 
   const removeItem = async (cartId) => {
     try {
-      await axios.delete(`${API_URL}/cart/remove/${cartId}`);
+      await axios.delete(`${API_URL}/cart/remove/${cartId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
-      // 🔹 UI Se Item Remove Karna
       setCartItems((prevItems) =>
         prevItems.filter((item) => item.cartId !== cartId)
       );
-      toast.success("Item Removed From Cart")
+      toast.success("Item Removed From Cart");
     } catch (error) {
       console.error(
         "Error removing item:",
@@ -100,7 +104,7 @@ const Cart = () => {
       toast.error("Please log in to proceed to checkout.");
       return;
     }
-    navigate('/checkout', { state: { cartItems, subtotal } });
+    navigate("/checkout", { state: { cartItems, subtotal } });
   };
 
   const subtotal = cartItems?.reduce(
@@ -110,7 +114,7 @@ const Cart = () => {
 
   return (
     <>
-    <ToastContainer/>
+      <ToastContainer />
       <div className="max-w-6xl mx-auto p-4 bg-white rounded-lg md:mt-25 mt-30 mb-10">
         {loading ? (
           <p>Loading...</p>
@@ -274,7 +278,7 @@ const Cart = () => {
               <p className="font-semibold">Total: ₹{subtotal}</p>
               <button
                 className="mt-4 px-6 py-2 bg-black text-white rounded-md md:w-[450px] transition duration-300 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500"
-                onClick={()=>handleCheckout()}
+                onClick={() => handleCheckout()}
               >
                 Proceed to Checkout
               </button>
